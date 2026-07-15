@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Academy 2026 - platformă e-learning despre utilizarea responsabilă și practică a inteligenței artificiale." />
+  <title>AI Academy 2026</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef2ff;
+      --text: #172033;
+      --muted: #667085;
+      --primary: #5b5bd6;
+      --primary-dark: #4545b8;
+      --success: #1f9d68;
+      --warning: #e7a11a;
+      --danger: #d64545;
+      --border: #dde3ee;
+      --shadow: 0 14px 40px rgba(30, 41, 59, 0.10);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f8faff 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+
+    button, input, select { font: inherit; }
+
+    button { cursor: pointer; }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 24px 18px;
+      background: #111827;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #7c3aed, #2563eb);
+      box-shadow: 0 8px 22px rgba(99, 102, 241, .35);
+    }
+
+    .nav {
+      display: grid;
+      gap: 8px;
+    }
+
+    .nav button {
+      border: 0;
+      color: #d1d5db;
+      background: transparent;
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: 12px;
+      transition: .2s ease;
+    }
+
+    .nav button:hover,
+    .nav button.active {
+      color: #fff;
+      background: rgba(255,255,255,.10);
+    }
+
+    .sidebar-note {
+      margin-top: auto;
+      padding: 15px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      color: #cbd5e1;
+      font-size: .88rem;
+      line-height: 1.5;
+    }
+
+    .main {
+      padding: 28px;
+      max-width: 1500px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .topbar h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.6rem, 3vw, 2.35rem);
+    }
+
+    .topbar p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .user-pill {
+      min-width: 210px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px 8px 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 800;
+      background: linear-gradient(135deg, #5b5bd6, #8b5cf6);
+    }
+
+    .user-pill strong { display: block; }
+    .user-pill span { color: var(--muted); font-size: .82rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr;
+      gap: 20px;
+      padding: 28px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #222b68 0%, #5b5bd6 60%, #7c3aed 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      right: -120px;
+      top: -120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.10);
+    }
+
+    .hero h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.7rem, 3.5vw, 3rem);
+      max-width: 760px;
+    }
+
+    .hero p {
+      max-width: 760px;
+      color: #e2e8f0;
+      line-height: 1.65;
+      margin: 0 0 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 16px;
+      font-weight: 750;
+      transition: .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: #fff;
+      color: #302e81;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.20);
+    }
+
+    .hero-stats {
+      display: grid;
+      gap: 12px;
+      align-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-stat {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 1.65rem;
+      margin-bottom: 4px;
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .section-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .controls input,
+    .controls select {
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px 12px;
+      min-width: 190px;
+      outline: none;
+    }
+
+    .controls input:focus,
+    .controls select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(91,91,214,.12);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-size: .87rem;
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1.7rem;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .course-card {
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .course-cover {
+      padding: 20px;
+      min-height: 152px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cover-1 { background: linear-gradient(135deg, #2563eb, #7c3aed); }
+    .cover-2 { background: linear-gradient(135deg, #0f766e, #14b8a6); }
+    .cover-3 { background: linear-gradient(135deg, #b45309, #f59e0b); }
+    .cover-4 { background: linear-gradient(135deg, #be123c, #f43f5e); }
+    .cover-5 { background: linear-gradient(135deg, #4338ca, #6366f1); }
+    .cover-6 { background: linear-gradient(135deg, #334155, #64748b); }
+
+    .course-badge {
+      align-self: flex-start;
+      font-size: .78rem;
+      font-weight: 800;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.20);
+    }
+
+    .course-cover h3 {
+      margin: 20px 0 0;
+      font-size: 1.35rem;
+    }
+
+    .course-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      font-size: .83rem;
+      color: var(--muted);
+    }
+
+    .course-body p {
+      margin: 0;
+      line-height: 1.55;
+      color: #475467;
+      flex: 1;
+    }
+
+    .progress-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: .85rem;
+    }
+
+    .progress {
+      height: 9px;
+      background: #e9edf5;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #5b5bd6, #8b5cf6);
+      border-radius: inherit;
+      transition: width .35s ease;
+    }
+
+    .course-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .course-actions .btn {
+      flex: 1;
+      padding: 10px 12px;
+    }
+
+    .btn-dark {
+      background: #111827;
+      color: white;
+    }
+
+    .btn-light {
+      background: #eef2ff;
+      color: #3730a3;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .progress-overview {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .progress-ring {
+      --value: 0;
+      width: 180px;
+      aspect-ratio: 1;
+      margin: 0 auto;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--primary) calc(var(--value) * 1%), #e7eaf2 0);
+      position: relative;
+    }
+
+    .progress-ring::before {
+      content: "";
+      width: 138px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: white;
+      position: absolute;
+    }
+
+    .progress-ring strong {
+      position: relative;
+      font-size: 2rem;
+      z-index: 1;
+    }
+
+    .course-progress-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .course-progress-item {
+      display: grid;
+      grid-template-columns: minmax(150px, 1fr) 2fr 60px;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .course-progress-item span {
+      font-size: .9rem;
+    }
+
+    .course-progress-item b {
+      text-align: right;
+      font-size: .9rem;
+    }
+
+    .hidden { display: none !important; }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.64);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-card {
+      width: min(860px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      background: white;
+      border-radius: 22px;
+      box-shadow: 0 30px 80px rgba(15,23,42,.25);
+    }
+
+    .modal-head {
+      padding: 20px 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: start;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 2;
+    }
+
+    .modal-head h2 { margin: 0 0 5px; }
+    .modal-head p { margin: 0; color: var(--muted); }
+
+    .icon-btn {
+      border: 0;
+      background: #eef2f7;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+    }
+
+    .lesson-list {
+      padding: 20px 22px 24px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .lesson {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .lesson input {
+      width: 19px;
+      height: 19px;
+      accent-color: var(--primary);
+    }
+
+    .lesson strong { display: block; }
+    .lesson small { color: var(--muted); }
+
+    .lesson-content {
+      grid-column: 2 / 4;
+      padding: 12px 0 0;
+      color: #475467;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .lesson.open .lesson-content { display: block; }
+
+    .quiz-box {
+      margin: 0 22px 24px;
+      padding: 18px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .quiz-box h3 { margin-top: 0; }
+
+    .quiz-option {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .quiz-feedback {
+      margin-top: 12px;
+      font-weight: 700;
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 200;
+      background: #111827;
+      color: white;
+      padding: 13px 16px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      padding: 34px 0 10px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .86rem;
+    }
+
+    @media (max-width: 1080px) {
+      .courses-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 800px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        overflow-x: auto;
+      }
+      .nav { display: flex; }
+      .sidebar-note { display: none; }
+      .main { padding: 18px; }
+      .topbar { align-items: flex-start; }
+      .user-pill { min-width: 0; }
+      .user-pill div:last-child { display: none; }
+      .progress-overview { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .courses-grid,
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .section-head { align-items: stretch; flex-direction: column; }
+      .controls { flex-direction: column; }
+      .controls input,
+      .controls select { width: 100%; }
+      .course-progress-item { grid-template-columns: 1fr; gap: 7px; }
+      .course-progress-item b { text-align: left; }
+      .lesson { grid-template-columns: auto 1fr; }
+      .lesson .btn { grid-column: 1 / 3; }
+      .lesson-content { grid-column: 1 / 3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">AI</div>
+        <div>AI Academy 2026</div>
+      </div>
+
+      <nav class="nav" aria-label="Navigație principală">
+        <button class="active" data-target="dashboard">Panou principal</button>
+        <button data-target="courses">Cursuri</button>
+        <button data-target="progress">Progres</button>
+      </nav>
+
+      <div class="sidebar-note">
+        Învață practic, verifică sursele și folosește inteligența artificială în mod responsabil.
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Bun venit, <span id="displayName">cursant</span>!</h1>
+          <p>Continuă să îți dezvolți competențele pentru lumea AI din 2026.</p>
+        </div>
+        <div class="user-pill">
+          <div class="avatar" id="avatar">C</div>
+          <div>
+            <strong id="profileName">Cursant</strong>
+            <span>Cont local</span>
+          </div>
+        </div>
+      </header>
+
+      <section id="dashboard" class="view">
+        <div class="hero">
+          <div>
+            <h2>Folosește inteligența artificială cu încredere, discernământ și rezultate reale.</h2>
+            <p>
+              Parcurge lecții despre prompturi, productivitate, verificarea informațiilor,
+              etică, automatizare și siguranță. Progresul tău este salvat automat în acest browser.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" id="continueBtn">Continuă învățarea</button>
+              <button class="btn btn-secondary" id="editNameBtn">Schimbă numele</button>
+            </div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong id="heroProgress">0%</strong>
+              progres total
+            </div>
+            <div class="hero-stat">
+              <strong id="heroLessons">0</strong>
+              lecții finalizate
+            </div>
+            <div class="hero-stat">
+              <strong id="heroCourses">0</strong>
+              cursuri încheiate
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span>Total cursuri</span>
+            <strong>6</strong>
+          </div>
+          <div class="stat-card">
+            <span>Total lecții</span>
+            <strong id="totalLessonsStat">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>Timp estimat</span>
+            <strong>8h 30m</strong>
+          </div>
+          <div class="stat-card">
+            <span>Nivel general</span>
+            <strong>Începător–Avansat</strong>
+          </div>
+        </div>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>Cursuri recomandate</h2>
+              <p>Începe cu fundamentele și avansează către automatizare și guvernanță.</p>
+            </div>
+          </div>
+          <div id="recommendedCourses" class="courses-grid"></div>
+        </section>
+      </section>
+
+      <section id="courses" class="view hidden">
+        <div class="section-head">
+          <div>
+            <h2>Biblioteca de cursuri</h2>
+            <p>Filtrează după nivel sau caută după titlu și subiect.</p>
+          </div>
+          <div class="controls">
+            <input id="searchInput" type="search" placeholder="Caută un curs..." />
+            <select id="levelFilter">
+              <option value="all">Toate nivelurile</option>
+              <option value="Începător">Începător</option>
+              <option value="Intermediar">Intermediar</option>
+              <option value="Avansat">Avansat</option>
+            </select>
+          </div>
+        </div>
+        <div id="allCourses" class="courses-grid"></div>
+      </section>
+
+      <section id="progress" class="view hidden">
+        <div class="section-head">
+          <div>
+            <h2>Progresul tău</h2>
+            <p>O imagine de ansamblu asupra cursurilor și lecțiilor finalizate.</p>
+          </div>
+          <button class="btn btn-light" id="resetProgressBtn">Resetează progresul</button>
+        </div>
+
+        <div class="panel progress-overview">
+          <div class="progress-ring" id="progressRing">
+            <strong id="overallPercent">0%</strong>
+          </div>
+          <div>
+            <h3>Situație generală</h3>
+            <p style="color:var(--muted);line-height:1.6">
+              Bifează lecțiile finalizate în fiecare curs. Datele rămân salvate local pe dispozitivul tău.
+            </p>
+            <div id="courseProgressList" class="course-progress-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        AI Academy 2026 · Aplicație demonstrativă standalone pentru GitHub Pages
+      </footer>
+    </main>
+  </div>
+
+  <div class="modal" id="courseModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <h2 id="modalTitle">Curs</h2>
+          <p id="modalSubtitle"></p>
+        </div>
+        <button class="icon-btn" id="closeModalBtn" aria-label="Închide">×</button>
+      </div>
+      <div id="lessonList" class="lesson-list"></div>
+      <div id="quizBox" class="quiz-box"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const courses = [
+      {
+        id: "fundamente",
+        title: "Fundamentele inteligenței artificiale",
+        level: "Începător",
+        duration: "70 min",
+        cover: "cover-1",
+        description: "Înțelege conceptele de bază, limitele modelelor și diferența dintre AI generativă, automatizare și analiză predictivă.",
+        lessons: [
+          ["Ce este și ce nu este AI", "Inteligența artificială identifică tipare și generează rezultate pe baza datelor și instrucțiunilor. Nu are intenții sau înțelegere umană."],
+          ["Modele generative și multimodale", "Modelele moderne pot lucra cu text, imagini, audio și documente, dar calitatea rezultatului depinde de context și verificare."],
+          ["Halucinații și limite", "Un răspuns fluent poate fi incorect. Verifică informațiile importante în surse credibile și actualizate."],
+          ["Alegerea instrumentului potrivit", "Folosește un model conversațional pentru idei și redactare, instrumente specializate pentru analiză, cod sau căutare documentară."]
+        ],
+        quiz: {
+          question: "Care este cea mai sigură abordare pentru un răspuns AI important?",
+          options: ["Îl publici imediat", "Îl verifici în surse credibile", "Îl consideri corect dacă este lung"],
+          answer: 1
+        }
+      },
+      {
+        id: "prompting",
+        title: "Prompting eficient în 2026",
+        level: "Începător",
+        duration: "80 min",
+        cover: "cover-2",
+        description: "Învață să formulezi cereri clare, să oferi context, criterii de calitate și exemple pentru rezultate mai bune.",
+        lessons: [
+          ["Structura unui prompt bun", "Include rolul, obiectivul, contextul, formatul dorit și criteriile după care vei evalua răspunsul."],
+          ["Exemple și contraexemple", "Un exemplu bun reduce ambiguitatea. Un contraexemplu arată modelului ce rezultat trebuie evitat."],
+          ["Iterație și rafinare", "Pornește cu o versiune inițială, evaluează rezultatul și rafinează instrucțiunile în pași mici."],
+          ["Prompturi pentru muncă", "Pentru documente profesionale, cere structură, ton, public țintă și limită de lungime."]
+        ],
+        quiz: {
+          question: "Ce element reduce cel mai bine ambiguitatea unui prompt?",
+          options: ["Un exemplu relevant", "Mai multe adjective", "Scrierea cu majuscule"],
+          answer: 0
+        }
+      },
+      {
+        id: "productivitate",
+        title: "AI pentru productivitate și învățare",
+        level: "Intermediar",
+        duration: "95 min",
+        cover: "cover-3",
+        description: "Aplică AI pentru rezumate, planuri, prezentări, cercetare asistată, învățare personalizată și organizarea sarcinilor.",
+        lessons: [
+          ["Rezumatul documentelor", "Cere ideile principale, argumentele, riscurile și întrebările rămase, nu doar un rezumat generic."],
+          ["Planuri de învățare", "Un plan bun include obiective, nivel inițial, timp disponibil, exerciții și modalități de verificare."],
+          ["Cercetare asistată", "Folosește AI pentru a găsi direcții și întrebări, apoi validează sursele și data informației."],
+          ["Fluxuri personale de lucru", "Combină șabloane, liste de verificare și automatizări simple pentru activități repetitive."]
+        ],
+        quiz: {
+          question: "În cercetarea asistată de AI, ce pas rămâne esențial?",
+          options: ["Validarea surselor", "Eliminarea contextului", "Acceptarea primei variante"],
+          answer: 0
+        }
+      },
+      {
+        id: "siguranta",
+        title: "Siguranță, confidențialitate și etică",
+        level: "Intermediar",
+        duration: "90 min",
+        cover: "cover-4",
+        description: "Protejează datele personale, recunoaște riscurile, evită utilizările manipulative și documentează deciziile importante.",
+        lessons: [
+          ["Date personale și sensibile", "Nu introduce date confidențiale, parole, informații medicale sau documente interne fără permisiune și protecții adecvate."],
+          ["Bias și echitate", "Rezultatele pot reflecta prejudecăți din date. Evaluează impactul asupra grupurilor și persoanelor afectate."],
+          ["Transparență", "Menționează utilizarea AI atunci când aceasta influențează semnificativ un rezultat profesional sau educațional."],
+          ["Conținut sintetic", "Verifică proveniența imaginilor, vocilor și clipurilor, mai ales în contexte sensibile sau politice."]
+        ],
+        quiz: {
+          question: "Ce informație nu ar trebui introdusă într-un instrument AI public?",
+          options: ["O idee generică", "O parolă de acces", "Un titlu de prezentare"],
+          answer: 1
+        }
+      },
+      {
+        id: "automatizare",
+        title: "Automatizări și agenți AI",
+        level: "Avansat",
+        duration: "105 min",
+        cover: "cover-5",
+        description: "Descoperă cum proiectezi fluxuri cu agenți, instrumente conectate, aprobări umane și limite clare de execuție.",
+        lessons: [
+          ["De la chatbot la agent", "Un agent poate planifica pași și folosi instrumente, dar are nevoie de limite, permisiuni și monitorizare."],
+          ["Human-in-the-loop", "Păstrează aprobarea umană pentru acțiuni financiare, juridice, publice sau greu reversibile."],
+          ["Jurnale și audit", "Înregistrează intrările, ieșirile și acțiunile importante pentru a putea investiga erorile."],
+          ["Evaluarea automatizărilor", "Măsoară acuratețea, costul, timpul economisit, incidentele și numărul de intervenții umane."]
+        ],
+        quiz: {
+          question: "Pentru o acțiune greu reversibilă, ce este recomandat?",
+          options: ["Execuție complet automată", "Aprobare umană", "Fără jurnalizare"],
+          answer: 1
+        }
+      },
+      {
+        id: "guvernanta",
+        title: "Guvernanță și evaluarea sistemelor AI",
+        level: "Avansat",
+        duration: "70 min",
+        cover: "cover-6",
+        description: "Construiește politici interne, criterii de evaluare, registre de risc și procese de aprobare pentru utilizarea responsabilă.",
+        lessons: [
+          ["Registrul utilizărilor AI", "Documentează instrumentul, scopul, datele folosite, responsabilul și impactul potențial."],
+          ["Evaluări înainte de lansare", "Testează scenarii normale, cazuri-limită, erori probabile și efecte asupra utilizatorilor."],
+          ["Monitorizare continuă", "Performanța se poate schimba în timp. Repetă testele și urmărește incidentele după lansare."],
+          ["Politici și responsabilități", "Stabilește cine poate aproba, cine răspunde și când este necesară escaladarea."]
+        ],
+        quiz: {
+          question: "Ce trebuie făcut după lansarea unui sistem AI?",
+          options: ["Monitorizare continuă", "Oprirea evaluării", "Ștergerea jurnalelor"],
+          answer: 0
+        }
+      }
+    ];
+
+    const STORAGE_KEY = "aiAcademy2026Progress";
+    const NAME_KEY = "aiAcademy2026Name";
+
+    let progress = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    let activeCourseId = null;
+
+    function completedLessons(course) {
+      return course.lessons.filter((_, index) => progress[course.id]?.includes(index)).length;
+    }
+
+    function coursePercent(course) {
+      return Math.round((completedLessons(course) / course.lessons.length) * 100);
+    }
+
+    function totalLessonCount() {
+      return courses.reduce((sum, course) => sum + course.lessons.length, 0);
+    }
+
+    function totalCompletedLessons() {
+      return courses.reduce((sum, course) => sum + completedLessons(course), 0);
+    }
+
+    function overallPercent() {
+      return Math.round((totalCompletedLessons() / totalLessonCount()) * 100);
+    }
+
+    function completedCourses() {
+      return courses.filter(course => coursePercent(course) === 100).length;
+    }
+
+    function saveProgress() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+      updateStats();
+      renderCourses();
+      renderProgress();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function cardTemplate(course) {
+      const percent = coursePercent(course);
+      return `
+        <article class="course-card" data-title="${course.title.toLowerCase()}" data-level="${course.level}">
+          <div class="course-cover ${course.cover}">
+            <span class="course-badge">${course.level}</span>
+            <h3>${course.title}</h3>
+          </div>
+          <div class="course-body">
+            <div class="course-meta">
+              <span>⏱ ${course.duration}</span>
+              <span>📘 ${course.lessons.length} lecții</span>
+            </div>
+            <p>${course.description}</p>
+            <div class="progress-row">
+              <span>Progres</span>
+              <strong>${percent}%</strong>
+            </div>
+            <div class="progress"><div style="width:${percent}%"></div></div>
+            <div class="course-actions">
+              <button class="btn btn-dark" onclick="openCourse('${course.id}')">
+                ${percent === 0 ? "Începe cursul" : percent === 100 ? "Recapitulează" : "Continuă"}
+              </button>
+              <button class="btn btn-light" onclick="markCourseComplete('${course.id}')">Finalizează</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderCourses() {
+      document.getElementById("recommendedCourses").innerHTML = courses.slice(0, 3).map(cardTemplate).join("");
+      document.getElementById("allCourses").innerHTML = courses.map(cardTemplate).join("");
+      applyFilters();
+    }
+
+    function updateStats() {
+      const overall = overallPercent();
+      document.getElementById("heroProgress").textContent = overall + "%";
+      document.getElementById("heroLessons").textContent = totalCompletedLessons();
+      document.getElementById("heroCourses").textContent = completedCourses();
+      document.getElementById("overallPercent").textContent = overall + "%";
+      document.getElementById("progressRing").style.setProperty("--value", overall);
+      document.getElementById("totalLessonsStat").textContent = totalLessonCount();
+    }
+
+    function renderProgress() {
+      const container = document.getElementById("courseProgressList");
+      container.innerHTML = courses.map(course => {
+        const percent = coursePercent(course);
+        return `
+          <div class="course-progress-item">
+            <span>${course.title}</span>
+            <div class="progress"><div style="width:${percent}%"></div></div>
+            <b>${percent}%</b>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function openCourse(id) {
+      activeCourseId = id;
+      const course = courses.find(item => item.id === id);
+      document.getElementById("modalTitle").textContent = course.title;
+      document.getElementById("modalSubtitle").textContent = `${course.level} · ${course.duration}`;
+      document.getElementById("lessonList").innerHTML = course.lessons.map((lesson, index) => {
+        const checked = progress[id]?.includes(index);
+        return `
+          <div class="lesson" id="lesson-${id}-${index}">
+            <input type="checkbox" ${checked ? "checked" : ""} onchange="toggleLesson('${id}', ${index}, this.checked)" aria-label="Marchează lecția ca finalizată">
+            <div>
+              <strong>${index + 1}. ${lesson[0]}</strong>
+              <small>${checked ? "Finalizată" : "De parcurs"}</small>
+            </div>
+            <button class="btn btn-light" onclick="toggleLessonContent('${id}', ${index})">Deschide lecția</button>
+            <div class="lesson-content">${lesson[1]}</div>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("quizBox").innerHTML = `
+        <h3>Verificare rapidă</h3>
+        <p>${course.quiz.question}</p>
+        ${course.quiz.options.map((option, index) => `
+          <label class="quiz-option">
+            <input type="radio" name="quiz-${course.id}" value="${index}"> ${option}
+          </label>
+        `).join("")}
+        <button class="btn btn-dark" onclick="checkQuiz('${course.id}')">Verifică răspunsul</button>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+      `;
+
+      document.getElementById("courseModal").classList.add("open");
+    }
+
+    function closeCourse() {
+      document.getElementById("courseModal").classList.remove("open");
+      activeCourseId = null;
+    }
+
+    function toggleLesson(courseId, lessonIndex, isChecked) {
+      const current = new Set(progress[courseId] || []);
+      isChecked ? current.add(lessonIndex) : current.delete(lessonIndex);
+      progress[courseId] = [...current].sort((a,b) => a-b);
+      saveProgress();
+      openCourse(courseId);
+      showToast(isChecked ? "Lecție marcată ca finalizată." : "Lecție redeschisă.");
+    }
+
+    function toggleLessonContent(courseId, lessonIndex) {
+      const lesson = document.getElementById(`lesson-${courseId}-${lessonIndex}`);
+      lesson.classList.toggle("open");
+      const button = lesson.querySelector("button");
+      button.textContent = lesson.classList.contains("open") ? "Închide lecția" : "Deschide lecția";
+    }
+
+    function markCourseComplete(courseId) {
+      const course = courses.find(item => item.id === courseId);
+      progress[courseId] = course.lessons.map((_, index) => index);
+      saveProgress();
+      showToast("Curs marcat ca finalizat.");
+    }
+
+    function checkQuiz(courseId) {
+      const course = courses.find(item => item.id === courseId);
+      const selected = document.querySelector(`input[name="quiz-${courseId}"]:checked`);
+      const feedback = document.getElementById("quizFeedback");
+      if (!selected) {
+        feedback.textContent = "Alege un răspuns.";
+        feedback.style.color = "var(--warning)";
+        return;
+      }
+      const correct = Number(selected.value) === course.quiz.answer;
+      feedback.textContent = correct ? "Corect! Ai înțeles ideea principală." : "Nu este corect. Recitește lecțiile și încearcă din nou.";
+      feedback.style.color = correct ? "var(--success)" : "var(--danger)";
+    }
+
+    function applyFilters() {
+      const query = (document.getElementById("searchInput")?.value || "").toLowerCase().trim();
+      const level = document.getElementById("levelFilter")?.value || "all";
+      document.querySelectorAll("#allCourses .course-card").forEach(card => {
+        const matchText = card.dataset.title.includes(query);
+        const matchLevel = level === "all" || card.dataset.level === level;
+        card.classList.toggle("hidden", !(matchText && matchLevel));
+      });
+    }
+
+    function switchView(target) {
+      document.querySelectorAll(".view").forEach(view => view.classList.add("hidden"));
+      document.getElementById(target).classList.remove("hidden");
+      document.querySelectorAll(".nav button").forEach(button => {
+        button.classList.toggle("active", button.dataset.target === target);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function setupProfile() {
+      const savedName = localStorage.getItem(NAME_KEY) || "Cursant";
+      document.getElementById("displayName").textContent = savedName;
+      document.getElementById("profileName").textContent = savedName;
+      document.getElementById("avatar").textContent = savedName.charAt(0).toUpperCase();
+    }
+
+    function editName() {
+      const current = localStorage.getItem(NAME_KEY) || "Cursant";
+      const next = prompt("Cum dorești să te numească aplicația?", current);
+      if (next && next.trim()) {
+        localStorage.setItem(NAME_KEY, next.trim());
+        setupProfile();
+        showToast("Numele a fost actualizat.");
+      }
+    }
+
+    function continueLearning() {
+      const nextCourse = courses.find(course => coursePercent(course) < 100) || courses[0];
+      openCourse(nextCourse.id);
+    }
+
+    document.querySelectorAll(".nav button").forEach(button => {
+      button.addEventListener("click", () => switchView(button.dataset.target));
+    });
+
+    document.getElementById("searchInput").addEventListener("input", applyFilters);
+    document.getElementById("levelFilter").addEventListener("change", applyFilters);
+    document.getElementById("closeModalBtn").addEventListener("click", closeCourse);
+    document.getElementById("courseModal").addEventListener("click", event => {
+      if (event.target.id === "courseModal") closeCourse();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeCourse();
+    });
+
+    document.getElementById("editNameBtn").addEventListener("click", editName);
+    document.getElementById("continueBtn").addEventListener("click", continueLearning);
+
+    document.getElementById("resetProgressBtn").addEventListener("click", () => {
+      const confirmed = confirm("Sigur dorești să ștergi tot progresul salvat?");
+      if (!confirmed) return;
+      progress = {};
+      saveProgress();
+      showToast("Progresul a fost resetat.");
+    });
+
+    setupProfile();
+    renderCourses();
+    updateStats();
+    renderProgress();
+  </script>
+</body>
+</html>
