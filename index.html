@@ -177,8 +177,6 @@ input,select{background:#fff;color:var(--text)}
 
 .course-figure{margin-bottom:14px;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-soft);background:#f8fafc;padding:10px;display:flex;align-items:center;justify-content:center}
 .course-figure img{display:block;width:100%;height:220px;object-fit:contain;object-position:center;border-radius:12px;background:#fff}
-.course-modal-hero{margin:0 20px 20px;border-radius:20px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-soft);background:#fff}
-.course-modal-hero img{display:block;width:100%;height:280px;object-fit:cover;object-position:center}
 .lesson-content p{margin:0 0 14px}
 .lesson-content p:last-child{margin-bottom:0}
 @media(max-width:600px){.course-figure img{height:190px}.course-modal-hero img{height:210px}}
@@ -267,7 +265,7 @@ function renderProgress(){
     </div>`;
   }).join("");
 }
-function openCourse(id){let c=courses.find(x=>x.id===id);modalTitleEl.textContent=c.title;modalSubEl.textContent=`${c.level} · ${c.duration}`;lessonsEl.innerHTML=`<figure class="course-modal-hero"><img src="${c.image}" alt="Ilustrație pentru cursul ${c.title}"></figure>` + c.lessons.map((l,i)=>{const isDone=(progress[id]||[]).includes(i);return `<article class="lesson"><div class="lesson-top"><input type="checkbox" ${isDone?"checked":""} onchange="toggle('${id}',${i},this.checked)" aria-label="Marchează lecția ca finalizată"><div class="lesson-number">${i+1}</div><div class="lesson-title-wrap"><strong>${l[0]}</strong><div class="lesson-meta"><span class="lesson-chip time">⏱ ${lessonMinutes(c,i)} min</span></div></div><span class="lesson-status ${isDone?"done":""}">${isDone?"Finalizată":"De parcurs"}</span></div><div class="lesson-content">${l[1]}</div></article>`;}).join("");quizEl.innerHTML=`<h3>Verificare rapidă</h3><p>${c.quiz.question}</p>${c.quiz.options.map((o,i)=>`<label style="display:block;margin:9px 0"><input type="radio" name="q" value="${i}"> ${o}</label>`).join("")}<button class="btn dark" onclick="check('${id}')">Verifică răspunsul</button><p id="feedback"></p>`;modalEl.classList.add("open")}
+function openCourse(id){let c=courses.find(x=>x.id===id);modalTitleEl.textContent=c.title;modalSubEl.textContent=`${c.level} · ${c.duration}`;lessonsEl.innerHTML=c.lessons.map((l,i)=>{const isDone=(progress[id]||[]).includes(i);return `<article class="lesson"><div class="lesson-top"><input type="checkbox" ${isDone?"checked":""} onchange="toggle('${id}',${i},this.checked)" aria-label="Marchează lecția ca finalizată"><div class="lesson-number">${i+1}</div><div class="lesson-title-wrap"><strong>${l[0]}</strong><div class="lesson-meta"><span class="lesson-chip time">⏱ ${lessonMinutes(c,i)} min</span></div></div><span class="lesson-status ${isDone?"done":""}">${isDone?"Finalizată":"De parcurs"}</span></div><div class="lesson-content">${l[1]}</div></article>`;}).join("");quizEl.innerHTML=`<h3>Verificare rapidă</h3><p>${c.quiz.question}</p>${c.quiz.options.map((o,i)=>`<label style="display:block;margin:9px 0"><input type="radio" name="q" value="${i}"> ${o}</label>`).join("")}<button class="btn dark" onclick="check('${id}')">Verifică răspunsul</button><p id="feedback"></p>`;modalEl.classList.add("open")}
 function closeModal(){modalEl.classList.remove("open")}
 function toggle(id,i,on){let s=new Set(progress[id]||[]);on?s.add(i):s.delete(i);progress[id]=[...s];save();openCourse(id)}
 function finish(id){let c=courses.find(x=>x.id===id);progress[id]=c.lessons.map((_,i)=>i);save();toastMsg("Curs finalizat.")}
